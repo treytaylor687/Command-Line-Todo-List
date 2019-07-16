@@ -1,8 +1,5 @@
 #include "todo.h"
 
-/**
- * Just like fgets except it omits the newline at the end if there is one! Check out the man page for fgets!
- */
 char *fgets_no_newline(char *buffer, int buf_length, FILE *stream) {
     char *result = fgets(buffer, buf_length, stream);
     if (result == NULL) {
@@ -16,8 +13,6 @@ char *fgets_no_newline(char *buffer, int buf_length, FILE *stream) {
 }
 
 /**
- * Reads a todo_list item from a file and appends it to the Todo_list for you!. Assumes that the todo_list item will
- * have its fields separated by newlines in the order:
  *
  * title
  * description

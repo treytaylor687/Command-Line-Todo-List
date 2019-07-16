@@ -1,6 +1,3 @@
-// This file will contain a few string macros that you will find EXTREMELY helpful in your program
-// Feel free to edit.
-
 /* General */
 #define GRAB_INPUT "> "
 

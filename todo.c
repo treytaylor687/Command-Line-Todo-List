@@ -18,7 +18,7 @@ void display_main_menu(void) {
     printf(MAIN_MENU_HEADER);
     printf(QUERY);
     printf(OPTIONS_LIST);
-	printf(GRAB_INPUT);
+    printf(GRAB_INPUT);
 }
 
 // Remove all completed items in the list
@@ -44,9 +44,9 @@ void remove_completed(void) {
     struct todo_list_item_t Todo_list_copy[TODO_LIST_MAX];
     int index = 0;
     for (int i = 0; i < TODO_LIST_MAX; i++) {
-		if (Todo_list[i].title[0] != '\0') {
-			Todo_list_copy[index++] = Todo_list[i];
-		}
+        if (Todo_list[i].title[0] != '\0') {
+            Todo_list_copy[index++] = Todo_list[i];
+        }
     }
     Todo_list_length -= removed_count;
     memcpy(Todo_list, Todo_list_copy, TODO_LIST_MAX);
@@ -55,13 +55,13 @@ void remove_completed(void) {
 
 void add_to_list(void) {
     printf(ADD_TO_LIST_HEADER);
-	if (Todo_list_length >= TODO_LIST_MAX) {
-		printf(LIST_MAX);
-	} else {
-    	printf(ADD_TO_LIST);
-   		read_todo_list_item(stdin);
-    	printf("\n");
-	}
+    if (Todo_list_length >= TODO_LIST_MAX) {
+        printf(LIST_MAX);
+    } else {
+        printf(ADD_TO_LIST);
+        read_todo_list_item(stdin);
+        printf("\n");
+    }
 }   
 
 // Display the todo list (Option 1)
@@ -92,15 +92,15 @@ void print_todo_list(void) {
 void mark_completed(void) { 
     printf(MARK_ITEM_COMPLETED_HEADER);
     printf(MARK_ITEM_USER_INPUT);
-	printf(GRAB_INPUT);
-	char buffer[10];
+    printf(GRAB_INPUT);
+    char buffer[10];
     fgets_no_newline(buffer, 10, stdin);
     int index = atoi(buffer);
-	if (index < 0 || index >= TODO_LIST_MAX) {
-		exit(1);
-	}
+    if (index < 0 || index >= TODO_LIST_MAX) {
+        exit(1);
+    }
     if (Todo_list[index].title[0] != '\0'
-		&& Todo_list[index].is_done == 0) {
+        && Todo_list[index].is_done == 0) {
         Todo_list[index].is_done = 1;
     }
 }
@@ -109,63 +109,63 @@ void save_to_file(void) {
     printf(SAVE_FILE_HEADER);
     char filename[127];
     printf(INPUT_FILE_NAME);
-	printf(GRAB_INPUT);
+    printf(GRAB_INPUT);
     fgets_no_newline(filename, 127, stdin);
     FILE *out_file = fopen(filename, "w");
-	if (out_file == NULL) {
-		exit(1);
-	}
+    if (out_file == NULL) {
+        exit(1);
+    }
     for (int i = 0; i < TODO_LIST_MAX; i++) {
         if (Todo_list[i].title[0] == '\0') {
             continue;
         } else {
-			for (int data = 0; data < 6; data++) {
-				if (data == 0) {
-					fprintf(out_file, "%s\n", Todo_list[i].title);
-				} else if (data == 1) {
-					fprintf(out_file, "%s\n", Todo_list[i].description);
-				} else if (data == 2) {
-					fprintf(out_file, "%d\n", Todo_list[i].is_done);
-				} else if (data == 3) {
-					fprintf(out_file, "%d\n", Todo_list[i].due_day);
-				} else if (data == 4) {
-					fprintf(out_file, "%d\n", Todo_list[i].due_month);
-				} else if (data == 5) {
-					fprintf(out_file, "%d\n", Todo_list[i].due_year);
-				}
-			}
+            for (int data = 0; data < 6; data++) {
+                if (data == 0) {
+                    fprintf(out_file, "%s\n", Todo_list[i].title);
+                } else if (data == 1) {
+                    fprintf(out_file, "%s\n", Todo_list[i].description);
+                } else if (data == 2) {
+                    fprintf(out_file, "%d\n", Todo_list[i].is_done);
+                } else if (data == 3) {
+                    fprintf(out_file, "%d\n", Todo_list[i].due_day);
+                } else if (data == 4) {
+                    fprintf(out_file, "%d\n", Todo_list[i].due_month);
+                } else if (data == 5) {
+                    fprintf(out_file, "%d\n", Todo_list[i].due_year);
+                }
+            }
         }
     }
-	fclose(out_file);
+    fclose(out_file);
 }
 
 int initialize_program(void) {
-	display_main_menu();
+    display_main_menu();
     char buffer[10];
     fgets_no_newline(buffer, 10, stdin);
     int command = atoi(buffer);
     if (command == 1) {
         print_todo_list();
         initialize_program();
-	} else if (command == 2) {
-		add_to_list();
-		initialize_program();
-	} else if (command == 3) {
-		mark_completed();
-		initialize_program();
-	} else if (command == 4) {
-		remove_completed();
-		initialize_program();
-	} else if (command == 5) {
-		save_to_file();
-		initialize_program();
-	} else if (command == 6) {
-		exit(0);
-	} else {
-		printf(INVALID_CHOICE);
-		initialize_program();
-	}
-	return 0;
+    } else if (command == 2) {
+        add_to_list();
+        initialize_program();
+    } else if (command == 3) {
+        mark_completed();
+        initialize_program();
+    } else if (command == 4) {
+        remove_completed();
+        initialize_program();
+    } else if (command == 5) {
+        save_to_file();
+        initialize_program();
+    } else if (command == 6) {
+        exit(0);
+    } else {
+        printf(INVALID_CHOICE);
+        initialize_program();
+    }
+    return 0;
 }
 
 int main(int argc, const char *argv[]) {
@@ -178,7 +178,7 @@ int main(int argc, const char *argv[]) {
         FILE *in_file = fopen(argv[1], "r");
         if (!in_file) {
             printf("ERROR: File, %s, does not exist!\n", argv[1]);
-			exit(1);
+            exit(1);
         }   
         char buffer[128];
         int i = 0;
@@ -215,7 +215,7 @@ int main(int argc, const char *argv[]) {
                     break;
             }
         }
-		fclose(in_file);
+        fclose(in_file);
     }   
     initialize_program();
     return 0;
