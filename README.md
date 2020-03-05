@@ -1,4 +1,4 @@
-This is a command line application written in C that supports adding, removing, completing, importing, or exporting items in your Todo list.
+This is a command line application written in C for a CS2110 assignment at Georgia Tech that supports adding, removing, completing, importing, or exporting items in your Todo list.
 
 ## Running the Application
 
